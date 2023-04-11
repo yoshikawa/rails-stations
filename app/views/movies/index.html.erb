@@ -1,0 +1,26 @@
+<h1>Movies#index</h1>
+<ul>
+  <% @movies.each do |movie| %>
+    <li>
+      <%= movie.name %>
+    </li>
+    <li>
+    <%= movie.year %>
+  </li>
+  <li>
+  <%= movie.description %>
+</li>
+  <li>
+  <%= movie.image_url %>
+</li>
+  <li>
+  <%= movie.is_showing %>
+</li>
+  <li>
+  <%= movie.created_at %>
+</li>
+  <li>
+  <%= movie.updated_at %>
+</li>
+  <% end %>
+</ul>
