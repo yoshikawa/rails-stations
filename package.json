@@ -14,7 +14,7 @@
   "version": "0.1.0",
   "devDependencies": {
     "simple-git-hooks": "^2.4.1",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-dev-server": "^4.13.3"
   },
   "scripts": {
     "login:techtrain": "techtrain-railway login",
