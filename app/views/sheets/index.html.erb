@@ -1,0 +1,18 @@
+<table>
+  <thead>
+      <tr>
+        <th>id</th>
+        <th>column</th>
+        <th>row</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sheets.each do |sheet|%>
+      <tr>
+        <td><%= sheet.id %></td>
+        <td><%= sheet.column %></td>
+        <td><%= sheet.row %></td>
+      </tr>
+      <% end %>
+    </tbody>
+</table>
