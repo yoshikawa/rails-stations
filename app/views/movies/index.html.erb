@@ -1,5 +1,22 @@
 <h1>Movies#index</h1>
-
+<div class="form">
+  <h2>映画検索</h2>
+  <% flash.each do |message_type, message| %>
+    <%= message %>
+  <% end %>
+  <%= form_with url: "/movies", method: :get do |f| %>
+    <%= f.search_field :keyword, placeholder: '検索ワード' %>
+    <div class="radio-form">
+      <%= f.radio_button :is_showing, "", {:checked => true} %>
+      <%= f.label :is_showing, "全て" %>
+      <%= f.radio_button :is_showing, "1" %>
+      <%= f.label :is_showing, "上映中" %>
+      <%= f.radio_button :is_showing, "0" %>
+      <%= f.label :is_showing, "公開予定" %>
+    </div>
+    <%= f.submit '検索', class: 'btn btn-primary' %>
+  <% end %>
+</div>
 <table>
   <thead>
       <tr>
@@ -14,22 +31,19 @@
       </tr>
     </thead>
     <tbody>
+    <% if @movies %>
       <% @movies.each do |movie|%>
       <tr>
         <td><%= movie.id %></td>
         <td><%= movie.name %></td>
         <td><%= movie.year %></td>
         <td><%= movie.description %></td>
-        <td><%= link_to movie.image_url, class: "movie-image"  %></td>
-        <% if movie.is_showing %>
-        <td>上映中</td>
-        <% end %>
-        <% if !movie.is_showing %>
-        <td>上映予定</td>
-        <% end %>
+        <td><%= image_tag movie.image_url, class: "movie-image"  %></td>
+        <td><%= movie.is_showing %></td>
         <td><%= movie.created_at %></td>
         <td><%= movie.updated_at %></td>
       </tr>
       <% end %>
+    <% end %>
     </tbody>
 </table>
