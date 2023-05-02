@@ -104,3 +104,19 @@ Movie.create!(
       }
     ]
   )
+Movie.all.each do |movie|
+  movie.schedules.create!(
+    [
+      {
+        movie_id: 1,
+        start_time: "2022-01-01",
+        end_time: "2022-02-01"
+      },
+      {
+        movie_id: 2,
+        start_time: "2023-01-01",
+        end_time: "2023-02-01"
+      }
+    ]
+  )
+end
