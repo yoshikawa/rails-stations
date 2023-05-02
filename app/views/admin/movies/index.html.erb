@@ -16,11 +16,11 @@
     <tbody>
       <% @movies.each do |movie|%>
       <tr>
-        <td><%= movie.id %></td>
+        <td><%= link_to movie.id, "/admin/movies/#{movie.id}/edit" %></td>
         <td><%= movie.name %></td>
         <td><%= movie.year %></td>
         <td><%= movie.description %></td>
-        <td><%= link_to movie.image_url, class: "movie-image"  %></td>
+        <td><%= link_to movie.image_url, class: "movie-image" %></td>
         <% if movie.is_showing %>
         <td>上映中</td>
         <% end %>
