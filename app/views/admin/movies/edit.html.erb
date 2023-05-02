@@ -30,4 +30,5 @@
         </div>
       <% end %>
   </div>
+  <%= button_to '削除', "/admin/movies/#{@movie.id}", method: :delete , data: { confirm: "Are you sure?" }%>
 </div>

@@ -33,6 +33,14 @@ class Admin::MoviesController < ApplicationController
       end
     end
 
+    def destroy
+      @movie = Movie.find(params[:id]);
+      if @movie.destroy
+        redirect_to("/admin/movies")
+        flash[:success] = "削除完了"
+      end
+    end
+
     private
     def movie_params
       params.require(:movie).permit(:name, :year, :description, :image_url, :is_showing)

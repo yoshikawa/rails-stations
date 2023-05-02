@@ -1,5 +1,7 @@
 <h1>Movies#index</h1>
-
+<% flash.each do |message_type, message| %>
+  <%= message %>
+<% end %>
 <table>
   <thead>
       <tr>
