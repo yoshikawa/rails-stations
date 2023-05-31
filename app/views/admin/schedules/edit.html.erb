@@ -1,0 +1,13 @@
+<%=form_with model: @schedule,method: :put,url: "/schedule/#{@schedule.id}" do |f|%>
+
+action="/admin/schedules/
+<h2><%=@schedule.movie_id%></h2>
+<h2><%=@schedule.movie.name%></h2>
+<%=f.label "開始時刻"%>
+<%=f.datetime_select  :start_time,use_month_numbers: true ,default: @schedule.start_time%>
+<br>
+<%=f.label "終了時刻" %>
+<%=f.datetime_select :end_time ,use_month_numbers: true,default: @schedule.end_time%>
+<br>
+<%= f.submit class: "btn btn-primary"%>
+<%end%>

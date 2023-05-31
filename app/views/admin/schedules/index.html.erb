@@ -1,0 +1,29 @@
+<% @movies.each do |movie|%>
+  <div>
+    <h2>作品ID：<%= movie.id %></h2>
+    <h2>作品名：<%= movie.name %></h2>
+    <% if @schedules = Schedule.where(movie_id: movie.id) %>
+    <table>
+      <thead>
+        <tr>
+          <th>開始時刻</th>
+          <th>終了時刻</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @schedules.each do |schedule|%>
+        <tr>
+          <td><%= schedule.start_time.strftime( "%H:%M" ) %></td>
+          <td><%= schedule.end_time.strftime( "%H:%M" ) %></td>
+          <td><%= link_to "詳細", "/admin/schedules/#{schedule.id}" %></td>
+          <td><%= button_to '削除', "/admin/schedules/#{schedule.id}", method: :delete , data: { confirm: "Are you sure?" }%></td>
+        </tr>
+        <% end %>
+    <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= link_to "新規スケジュール作成", "/admin/movies/#{movie.id}/schedules/new" %>
+<% end %>

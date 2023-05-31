@@ -1,37 +1,67 @@
-<h1>Movies#index</h1>
-<% flash.each do |message_type, message| %>
-  <%= message %>
-<% end %>
+<%=form_with url: admin_movies_path,method: :get do |f|%>
+<div class="search-radio-wrap">
+  <div class="search-radio">
+    <%=f.radio_button :is_showing, "all"%>
+    <%=f.label :is_showing,"すべて",{value: "all"}%>
+  </div>
+  <div class="search-radio">
+    <%=f.radio_button :is_showing , 1 %>
+    <%=f.label :is_showing,"上映中のみ",{value: 1}%>
+  </div>
+  <div class="search-radio">
+    <%=f.radio_button :is_showing, 0 %>
+    <%=f.label :is_showing,"上映予定のみ",{value: 0}%>
+  </div>
+</div>
+<div class="search-wrap">
+  <%=f.text_field :keyword,value:params[:keyword], placeholder: "keyword",class: "search-keyword"%>
+  <%=f.submit "検索",class:"search-submit"%>
+</div>
+<%end%>
+
 <table>
   <thead>
-      <tr>
-        <th>id</th>
-        <th>タイトル</th>
-        <th>公開年</th>
-        <th>概要</th>
-        <th>画像URL</th>
-        <th>上映中</th>
-        <th>登録日</th>
-        <th>更新日</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @movies.each do |movie|%>
-      <tr>
-        <td><%= link_to movie.id, "/admin/movies/#{movie.id}/edit" %></td>
-        <td><%= movie.name %></td>
-        <td><%= movie.year %></td>
-        <td><%= movie.description %></td>
-        <td><%= link_to movie.image_url, class: "movie-image" %></td>
-        <% if movie.is_showing %>
-        <td>上映中</td>
-        <% end %>
-        <% if !movie.is_showing %>
-        <td>上映予定</td>
-        <% end %>
-        <td><%= movie.created_at %></td>
-        <td><%= movie.updated_at %></td>
-      </tr>
-      <% end %>
-    </tbody>
+    <tr>
+      <th>ID</th>
+      <th>タイトル</th>
+      <th>上映年</th>
+      <th>詳細</th>
+      <th>公開状況</th>
+      <th>画像</th>
+      <th>スケジュール</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie| %>
+    <tr>
+      <td><%=movie.id%></td>
+      <td><%=link_to movie.name, "/admin/movies/#{movie.id}"%></td>
+      <td><%=movie.year%></td>
+      <td><%=movie.description%></td>
+      <td>
+        <%if movie.is_showing%>
+        上映中
+        <%else%>
+        上映予定
+        <%end%>
+      </td>
+      <td><%=image_tag movie.image_url,size: "50x50"%></td>
+      <td>
+        <%movie.schedules.each do |schedule|%>
+        <%=schedule.start_time%>
+        <%=schedule.end_time%>
+        <%end%>
+      </td>
+      <td>
+        <%=link_to  "/admin/movies/#{movie.id}/edit" do %>
+        <i class="far fa-edit"></i>
+        <%end%>
+        <%=link_to "/movies/#{movie.id}", method: :delete, data: { confirm: "【確認】該当データを削除してもよろしいですか？" } do%>
+        <i class="far fa-trash-alt"></i>
+        <%end%>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>

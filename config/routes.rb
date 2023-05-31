@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :movies, only: [:create, :update, :destroy]
     get '/movies/', to: "movies#index"
-    get '/movies/:id/edit', to: "movies#edit"
+    get '/movies/:id/', to: "movies#edit"
+    resources :schedules, only: [:create, :update, :destroy]
+    get '/schedules/', to: "schedules#index"
+    get '/schedules/:id/', to: "schedules#edit"
+    get '/movies/:id/schedules/new', to: "schedules#new"
   end
 end
