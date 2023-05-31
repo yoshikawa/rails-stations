@@ -1,0 +1,11 @@
+<div class="movie-card">
+  <img src="<%=@movie.image_url%>" class="movie-image" />
+
+  <div class="movie-title"><%=@movie.name%></div>
+  <div class="movie-year"><%=@movie.year%></div>
+  <div class="movie-description"><%=@movie.description%></div>
+</div>
+
+<%@schedules.each do |s|%>
+<%=s.start_time%>
+<%end%>
