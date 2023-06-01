@@ -1,0 +1,22 @@
+<% flash.each do |message_type, message| %>
+  <%= message %>
+<% end %>
+<table>
+  <thead>
+      <tr>
+        <th>id</th>
+        <th>column</th>
+        <th>row</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sheets.each do |sheet|%>
+      <tr>
+        <td><%= link_to_if(!@dup.include?(sheet.id), sheet.id, {controller: "reservations", action: "new", movie_id: params[:id], schedule_id: params[:schedule_id], sheet_id: sheet.id, date: params[:date]}) %></td> %>
+        <td><%= sheet.column %></td>
+        <td><%= sheet.row %></td>
+      </tr>
+      <% end %>
+    </tbody>
+</table>
+<%= params[:schedule_id] %>

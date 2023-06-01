@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  resources :reservations
   resources :schedules
   get "/movies", to: "movies#index"
-  resources :movies, only: [:show, :update, :destroy]
   get "/sheets", to: "sheets#index"
   get 'sheets/index'
   namespace :admin do
@@ -13,4 +13,10 @@ Rails.application.routes.draw do
     get '/schedules/:id/', to: "schedules#edit"
     get '/movies/:id/schedules/new', to: "schedules#new"
   end
+  resources :movies do
+    member do
+      get 'reservation'
+    end 
+  end
+  get '/movies/:movie_id/schedules/:schedule_id/reservations/new', to: "reservations#new"
 end
