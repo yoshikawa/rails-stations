@@ -29,7 +29,7 @@ class Admin::SchedulesController < ApplicationController
       redirect_to("/admin/schedules")
     else
       flash[:danger] = "更新失敗"
-      render action: :new
+      render action: :new, status: 400
     end
   end
 
