@@ -1,3 +1,4 @@
 class Sheet < ApplicationRecord
-    has_many :reservations, dependent: :restrict_with_error
+  has_many :reservation
+  has_many :screen
 end

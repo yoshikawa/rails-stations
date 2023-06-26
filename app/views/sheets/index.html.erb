@@ -1,18 +1,42 @@
-<table>
-  <thead>
-      <tr>
-        <th>id</th>
-        <th>column</th>
-        <th>row</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @sheets.each do |sheet|%>
-      <tr>
-        <td><%= sheet.id %></td>
-        <td><%= sheet.column %></td>
-        <td><%= sheet.row %></td>
-      </tr>
-      <% end %>
-    </tbody>
-</table>
+<div class="container-fluid m-0">
+  <div class="row align-items-center col-10">
+    <div class="d-flex justify-content-center row-height">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th></th>
+            <% (1..5).each do |i|%>
+            <th scope="col"><%=i%></th>
+            <% end%>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% ("a".."c").to_a.freeze.each do |c|%>
+          <tr>
+            <td><%= c.upcase%></td>
+            <% (1..5).to_a.freeze.each do |i|%> <%if
+            @sheets[@count_start+@cnt-1].sheets_reserbed? %>
+            <td
+              class="bg-secondary border"
+              value="<%=@count_start+@cnt%>"
+              id="<%"
+              ="c%"
+            >
+              -<%=i%>>
+            </td>
+            <%else%>
+            <td class="border" value="<%=@count_start+@cnt%>" id="<%" ="c%">
+              -<%=i%>> <%=link_to "■"
+              ,new_movie_schedule_reservation_path(movie_id:params[:movie_id],
+              schedule_id:params[:schedule_id], sheet_id:@count_start+@cnt)%>
+            </td>
+            <%end%> <%@cnt+=1%> <%end%>
+            <td><%= c.upcase%></td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
