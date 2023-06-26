@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @reservation = Reservation.new
     @movie = Movie.find_by(id: params[:movie_id])

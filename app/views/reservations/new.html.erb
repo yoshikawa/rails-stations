@@ -6,11 +6,13 @@
       <%= form_with url:reservations_path(movie_id:params[:movie_id],date:@schedule.start_time,sheet_id:params[:sheet_id],schedule_id:params[:schedule_id]) ,model: @reservation, method: :post do |f| %>
         <div class="form-group">
           <label>予約者氏名</label>
-            <%= f.text_field:name, class: "form-control" %>
+            <%=current_user.name%>
+            <%= f.hidden_field :name, value:current_user.name%>
         </div>
         <div class="form-group">
           <label>予約者メールアドレス</label>
-            <%= f.email_field:email, class: "form-control" %>
+            <%=current_user.email%>
+            <%= f.hidden_field :email, value:current_user.email%>
         </div>
         <%# hiddenパラメータで渡す %>
         <%= f.hidden_field :schedule_id, value: params[:schedule_id] %>
