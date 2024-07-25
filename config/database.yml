@@ -1,14 +1,16 @@
 default: &default
-  adapter: mysql2
+  adapter: trilogy
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: "password"
   host: db
-  sslverify: true
-  sslca: /var/lib/mysql/ca.pem
-  sslcert: /var/lib/mysql/client-cert.pem
-  sslkey: /var/lib/mysql/client-key.pem
+  ssl: true
+  ssl_mode: 4
+  tls_min_version: 3
+  ssl_ca: /var/lib/mysql/ca.pem
+  ssl_cert: /var/lib/mysql/client-cert.pem
+  ssl_key: /var/lib/mysql/client-key.pem
 
 development:
   <<: *default
